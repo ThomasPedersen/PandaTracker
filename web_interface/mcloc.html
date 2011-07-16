@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<style>
+body {
+  background: #29211B;
+  text-align: center;
+}
+#canvas {
+  border: 1px solid #000;
+  margin: 0 auto;
+}
+</style>
+<script>
+
+function fillBG() {
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#f0e8d1";
+  ctx.fillRect(0, 0, 2000, 2000);
+}
+
+var req = new XMLHttpRequest();
+var buf = '';
+var n = 0;
+
+req.onreadystatechange = function (e) {
+  if (req.readyState == 4) {
+    if(req.status == 200)
+      console.log(req.responseText);
+    else
+      console.log("Error loading page\n");
+  } else if (req.readyState == 3) {
+    var a = req.responseText.substring(n).split('')
+    for (var i in a) {
+      c = a[i];
+      if (c === '\n') {
+        handle(buf)
+        buf = '';
+      } else {
+        buf += c;
+      }
+    }
+    n = req.responseText.length;
+  }
+};
+
+function handle(msg) {
+  a = msg.split(' ');
+  plotPlayer(a[0], a[1], a[2]);
+}
+
+function plotPlayer(player, x, y) {
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = colorForName(player);
+  ctx.fillRect(parseFloat(x)+512, parseFloat(y)+384, 1, 1);
+}
+
+var players = {};
+
+var colors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#ffff00", "#00ffff", "#ff6622", "#004400", "#2200cc", "#a0aa00", "#7722ff", "#004499"];
+function colorForName(name) {
+  colors = [colors.pop()].concat(colors);
+  if (players[name] == undefined) players[name] = colors.pop();
+  return players[name];
+}
+
+function main() {
+  fillBG();
+  req.open('GET', 'http://0.0.0.0:3000/location', true); // Change this!
+  req.send(null);
+}
+</script>
+</head>
+<body onload="main();">
+  <canvas id="canvas" width="1024" height="768"></canvas>
+</body>
+</html>

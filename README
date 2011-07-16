@@ -1,0 +1,49 @@
+                                              
+    _/_/_/                              _/            
+   _/    _/    _/_/_/  _/_/_/      _/_/_/    _/_/_/   
+  _/_/_/    _/    _/  _/    _/  _/    _/  _/    _/    
+ _/        _/    _/  _/    _/  _/    _/  _/    _/     
+_/          _/_/_/  _/    _/    _/_/_/    _/_/_/      
+                                                      
+                                                      
+                                                                        
+_/_/_/_/_/                                _/                            
+   _/      _/  _/_/    _/_/_/    _/_/_/  _/  _/      _/_/    _/  _/_/   
+  _/      _/_/      _/    _/  _/        _/_/      _/_/_/_/  _/_/        
+ _/      _/        _/    _/  _/        _/  _/    _/        _/           
+_/      _/          _/_/_/    _/_/_/  _/    _/    _/_/_/  _/            
+                                                                        
+
+
+Disclaimer
+=================
+I hacked together this project in a rush, just to see if it would work. 
+Installing this require you to modify some of the code and compiling it yourself.
+No attention, whatsoever, was paid to, well, anything.
+It may also mess up your server.
+
+About
+=================
+bukkit_plugin
+This is, obviously, the source code for the Bukkit plugin.
+It contains some shell script that I used to build and deploy the plugin during development.
+They won't do you any good at all unless you modify them manually (sorry about that). But I added them anyway. You know, just in case you need some pointers.
+
+web_interface
+This directory contains two files.
+mcloc.js is a node.js script used to serve the mcloc.html file and to relay data between the minecraft server and the client. 
+This will probably only work on modern browsers.
+
+How to use
+=================
+Before compiling anything, replace any host names with your own. (Client.java and mcloc.html).
+Then compile and install it like you would with any other Bukkit plugin. 
+
+Start mcloc.js before you load your plugin:
+$ node mcloc.js
+
+Then load up your plugin and see if it works.
+
+Warning:
+=================
+This plugin is known to occasionally crash your minecraft server and the other scripts and stuff may cause excessive strain on your system in general and you probably shouldn't be running this at all.
